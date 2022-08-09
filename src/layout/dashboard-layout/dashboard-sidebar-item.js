@@ -50,22 +50,22 @@ export const DashboardSidebarItem = (props) => {
           onClick={handleToggle}
           startIcon={icon}
           sx={{
-            color: active ? 'secondary.main' : 'neutral.300',
-            justifyContent: 'flex-start',
+            color: active ? "secondary.main" : "neutral.300",
+            justifyContent: "flex-start",
             pl: `${paddingLeft}px`,
             pr: 3,
-            textAlign: 'left',
-            textTransform: 'none',
-            width: '100%',
-            '&:hover': {
-              backgroundColor: 'rgba(255,255,255, 0.08)'
+            textAlign: "left",
+            textTransform: "none",
+            width: "100%",
+            "&:hover": {
+              backgroundColor: "rgba(255,255,255, 0.04)",
             },
-            '& .MuiButton-startIcon': {
-              color: active ? 'secondary.main' : 'neutral.400'
+            "& .MuiButton-startIcon": {
+              color: active ? "secondary.main" : "neutral.400",
             },
-            '& .MuiButton-endIcon': {
-              color: 'neutral.400'
-            }
+            "& .MuiButton-endIcon": {
+              color: "neutral.400",
+            },
           }}
         >
           <Box sx={{ flexGrow: 1 }}>
@@ -104,22 +104,25 @@ export const DashboardSidebarItem = (props) => {
           endIcon={chip}
           disableRipple
           sx={{
-            backgroundColor: active && 'rgba(255,255,255, 0.08)',
             borderRadius: 1,
-            color: active ? 'secondary.main' : 'neutral.300',
-            fontWeight: active && 'fontWeightBold',
-            justifyContent: 'flex-start',
+            color: "neutral.700",
+            justifyContent: "flex-start",
             pl: `${paddingLeft}px`,
             pr: 3,
-            textAlign: 'left',
-            textTransform: 'none',
-            width: '100%',
-            '& .MuiButton-startIcon': {
-              color: active ? 'secondary.main' : 'neutral.400'
+            textAlign: "left",
+            textTransform: "none",
+            width: "100%",
+            ...(active && {
+              backgroundColor: "rgba(0,0,0, 0.04)",
+              color: "primary.main",
+              fontWeight: "fontWeightBold",
+            }),
+            "& .MuiButton-startIcon": {
+              color: active ? "primary.main" : "neutral.700",
             },
-            '&:hover': {
-              backgroundColor: 'rgba(255,255,255, 0.08)'
-            }
+            "&:hover": {
+              backgroundColor: "rgba(0,0,0, 0.04)",
+            },
           }}
         >
           <Box sx={{ flexGrow: 1 }}>

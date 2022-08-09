@@ -1,4 +1,5 @@
 // Colors
+
 const neutral = {
   100: '#F3F4F6',
   200: '#E5E7EB',
@@ -65,6 +66,7 @@ const text = {
   secondary: '#65748B',
   disabled: 'rgba(55, 65, 81, 0.48)'
 };
+
 
 export const lightThemeOptions = {
   components: {

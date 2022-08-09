@@ -189,17 +189,11 @@ export const DashboardSidebar = (props) => {
 						<Box sx={{ p: 3 }}>
 							<NextLink href="/" passHref>
 								<a>
-									<Logo
-										source="/static/logo.svg"
-										sx={{
-											height: 42,
-											width: 42,
-										}}
-									/>
+									<Logo />
 								</a>
 							</NextLink>
 						</Box>
-						<Box sx={{ px: 2 }}>
+						{/* <Box sx={{ px: 2 }}>
 							<Box
 								// onClick={handleOpenOrganizationsPopover}
 								ref={organizationsRef}
@@ -230,15 +224,15 @@ export const DashboardSidebar = (props) => {
 									}}
 								/>
 							</Box>
-						</Box>
+						</Box> */}
 					</div>
 
-					<Divider
+					{/* <Divider
 						sx={{
 							borderColor: "#2D3748",
 							my: 3,
 						}}
-					/>
+					/> */}
 					<Box sx={{ flexGrow: 1 }}>
 						{sections.map((section) => (
 							<DashboardSidebarSection
@@ -264,7 +258,7 @@ export const DashboardSidebar = (props) => {
 							{t("need-support")}
 						</Typography>
 						<Typography color="neutral.500" variant="body2">
-							Liên hệ admin@sand.so
+							Check our docs
 						</Typography>
 						<NextLink href="/docs" passHref>
 							<Button
@@ -290,12 +284,12 @@ export const DashboardSidebar = (props) => {
 				open
 				PaperProps={{
 					sx: {
-						backgroundColor: "neutral.900",
+						backgroundImage: "linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #E5F7FD 100%)",
+						// backgroundColor: "neutral.900",
 						borderRightColor: "divider",
 						borderRightStyle: "solid",
-						borderRightWidth: (theme) =>
-							theme.palette.mode === "dark" ? 1 : 0,
-						color: "#FFFFFF",
+						borderRightWidth: (theme) => theme.palette.mode === "dark" ? 1 : 0,
+						color: "#121828",
 						width: 280,
 					},
 				}}
@@ -313,7 +307,8 @@ export const DashboardSidebar = (props) => {
 			open={open}
 			PaperProps={{
 				sx: {
-					backgroundColor: "neutral.900",
+					backgroundColor: "neutral.100",
+					backgroundImage: "linear-gradient(-225deg, #E3FDEC 0%, #F8FFE9 100%);",
 					color: "#FFFFFF",
 					width: 280,
 				},
