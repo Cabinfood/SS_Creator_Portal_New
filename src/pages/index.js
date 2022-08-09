@@ -11,7 +11,7 @@ const Overview = () => {
 	const [resources, setResources] = useState()
 
 	useEffect(() => {
-		router.push("/newsfeed")
+		// router.push("/newsfeed")
 		// initialize()
 	}, []);
 

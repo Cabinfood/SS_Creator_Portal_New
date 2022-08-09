@@ -21,11 +21,11 @@ module.exports = withTM({
 
   async redirects() {
     return [
-      {
-        source: "/",
-        destination: "/newsfeed",
-        permanent: true,
-      },
+      // {
+      //   source: "/",
+      //   destination: "/newsfeed",
+      //   permanent: true,
+      // },
     ];
   },
 

@@ -81,13 +81,11 @@ export const AuthProvider = (props) => {
 								fullname: apiRet?.data?.fullname,
 								phone: apiRet?.data?.phone,
 								email: apiRet?.data?.email,
-								cabin_id: apiRet?.data?.id,
+								id: apiRet?.data?.id,
 								tier: apiRet?.data?.tier,
 								avatar: apiRet?.data?.avatar,
-								id_front_image: apiRet?.data?.id_front_image,
-								id_back_image: apiRet?.data?.id_back_image,
-								isKYC: (apiRet?.data?.id_front_image && apiRet?.data?.id_back_image) ? true : false,
-								notion_id: apiRet?.data?.notion_id
+								isKYC: apiRet?.data?.validKyc,
+								isAdmin: apiRet?.data?.isAdmin
 							},
 						},
 					});
