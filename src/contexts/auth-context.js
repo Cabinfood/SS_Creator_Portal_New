@@ -113,14 +113,13 @@ export const AuthProvider = (props) => {
 				type: "ACCESS",
 				payload: {
 					user: {
-						fullname: apiRet?.data?.user?.fullname?.title?.[0]?.plain_text,
-						phone: apiRet?.data?.phone?.rich_text?.[0]?.plain_text,
-						email: apiRet?.data?.email?.rich_text?.[0]?.plain_text,
-						cabin_id: apiRet?.data?.user?.cabin_id?.rich_text?.[0]?.plain_text,
-						tier: apiRet?.data?.tier?.select?.name,
-						avatar: apiRet?.data?.avatar?.files?.[0]?.external?.url || null,
-						isKYC: (apiRet?.data?.kyc_id_image_back?.files?.length > 0 && apiRet?.data?.kyc_id_image_front?.files?.length > 0) ? true : false,
-						notion_id: apiRet?.data?.notion_id
+						fullname: apiRet?.data?.user?.fullname,
+						phone: apiRet?.data?.phone,
+						email: apiRet?.data?.email,
+						id: apiRet?.data?.user?.id,
+						avatar: apiRet?.data?.avatar,
+						isKYC: apiRet?.data?.validKyc,
+						isAdmin: apiRet?.data?.isAdmin
 					}
 				},
 			});		
@@ -129,7 +128,8 @@ export const AuthProvider = (props) => {
 			router.push('/');
 			
 		} else {
-			console.log(data?.error)
+			console.log(apiRet?.error)
+			alert(apiRet?.error)
 		}
 	};
 

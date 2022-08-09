@@ -1,4 +1,5 @@
 import {generateJwtToken} from "@cabineat/utilities/jwt"
+import axios from "axios";
 import memberRepo from "../../../api-server/notion/repos/member.repo";
 import { JWT_SECURE_KEY } from "../../../constant";
 
@@ -6,6 +7,18 @@ import { JWT_SECURE_KEY } from "../../../constant";
 export default async function accessViaCabinID(req, res) {
     const {atk, profile} = req.body
 
+    const accessResponse = await accessSandsoViaAtk(atk, profile)
+    if (accessResponse === null || accessResponse?.activated === false || accessResponse?.locked === true) return null
+    return res.send({
+        token: generateJwtToken(
+            accessResponse,
+            JWT_SECURE_KEY, 
+            {expiresIn: "7d"}
+        ),
+        user: accessResponse || null,
+    })
+    
+    /*
     let memberRes = await memberRepo.getOneMemberByConditionByCabinID(profile?.id, profile?.phone)
     console.log(memberRes)
     if (memberRes) {
@@ -34,5 +47,45 @@ export default async function accessViaCabinID(req, res) {
             })
         }        
     } 
-    return null
+    */
 }
+
+
+const accessSandsoViaAtk = async(atk, profile) => {
+    const baseURL = "https://api.sand.so/v1"
+
+    // STEP1. CHECK IS_ACCESS SANDSO
+    const accessCabinIDURL = baseURL + '/auth/access/cabin-id'
+    const accessCabinIDResponse = await axios.post(accessCabinIDURL,{
+        cbidUserId: profile?.id,
+        cbidAtk: atk
+    })
+    
+
+    if (!accessCabinIDResponse?.data?.success) return null
+    
+    // STEP2. GET MEMBER INFO
+    const getMemberProfileURL = baseURL + "/auth/profile"
+    const memberResponse = await axios.get(getMemberProfileURL,{
+        headers: {
+            atk: accessCabinIDResponse?.data?.data?.atk
+        }
+    })
+    console.log("member info: ", memberResponse?.data?.data?.profile)
+    return memberResponse?.data?.data?.profile
+}
+
+
+// {
+//     id: 'dcfd038c-0fd8-11ed-8d74-e28be6d7b0c8',
+//     phone: '+84941926368',
+//     email: 'inbox.huytran@gmail.com',
+//     fullname: 'TRAN HOANG HUY',
+//     avatar: null,
+//     activated: true,
+//     locked: false,
+//     kycInfo: { cardID: {} },
+//     validKyc: false,
+//     isAdmin: false
+// }
+  

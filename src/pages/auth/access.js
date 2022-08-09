@@ -9,6 +9,7 @@ import { useAuth } from "../../hooks/use-auth";
 import { gtm } from "../../lib/gtm";
 import {AuthProvider} from '../../contexts/auth-context'
 import { CeAccessAccountViaCabinID, CE_ICON_TYPE } from "@cabineat/ui-react";
+import { CABIN_ID } from "../../config";
 
 const AuthAccess = () => {
 	const { platform, access } = useAuth();
@@ -105,13 +106,13 @@ const AuthAccess = () => {
 							p: 2,			
 						}}>
 							<CeAccessAccountViaCabinID
-								appId="002"
+								appId={CABIN_ID.CABIN_ID_APP_ID}
 								env="prod"
 								mode="dialog"				
 								label="Đăng nhập tài khoản"
-								callback= {(success, atk, profile)=>{
+								callback= {(success, atk, profile)=>{									
 									setFetching(true)
-									// console.log(success, atk, profile)
+									console.log(atk, profile)
 									if (success === 1) {
 										access(atk, profile)
 									}

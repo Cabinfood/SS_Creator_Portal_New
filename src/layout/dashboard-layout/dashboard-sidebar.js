@@ -4,13 +4,13 @@ import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import {
-Box,
-Button,
-Chip,
-Divider,
-Drawer,
-Typography,
-useMediaQuery,
+	Box,
+	Button,
+	Chip,
+	Divider,
+	Drawer,
+	Typography,
+	useMediaQuery,
 } from "@mui/material";
 import { Calendar as CalendarIcon } from "../../icons/calendar";
 import { Cash as CashIcon } from "../../icons/cash";
@@ -44,293 +44,97 @@ import FlagIcon from '@mui/icons-material/Flag';
 import CopyrightIcon from '@mui/icons-material/Copyright';
 import CloudIcon from '@mui/icons-material/Cloud';
 import { Audiotrack, Bookmark, HealthAndSafetyRounded } from "@mui/icons-material";
-
+import {
+	AccountCircle,
+	AccountCircleOutlined,
+	CloudUploadOutlined,
+	Copyright,
+	Flag,
+	FlagOutlined,
+	Leaderboard,
+	LeaderboardOutlined,
+	Message,
+	MessageOutlined,
+	ProductionQuantityLimitsOutlined,
+	Tag,
+	ToggleOn,
+	ToggleOnOutlined,
+	VideoLibrary,
+	VideoLibraryOutlined,
+} from "@mui/icons-material";
 import { useAuth } from "../../hooks/use-auth";
 
 const getSections = (t) => [
-{
-	title: t("general"),
-	items: [
 	{
-		title: t("Feed"),
-		path: "/newsfeed",
-		icon: <DynamicFeedIcon fontSize="small" />,
+		title: t("Overview"),
+		items: [
+			{
+				title: t("Analytics"),
+				path: "/dashboard",
+				icon: <ChartBarIcon fontSize="small" />,
+			},
+			{
+				title: t("Finance"),
+				path: "/dashboard/finance",
+				icon: <ChartPieIcon fontSize="small" />,
+			},
+		],
 	},
 	{
-		title: t("Discover"),
-		path: "/discover",
-		icon: <FlagIcon fontSize="small" />,
+		title: t("Management"),
+		items: [
+			{
+				title: t("Content IP"),
+				path: "/dashboard/content-ip",
+				icon: <Copyright fontSize="small" />,
+			},
+			{
+				title: t("Viral Contents"),
+				path: "/dashboard/viral-contents",
+				icon: <VideoLibraryOutlined fontSize="small" />,
+			},
+			{
+				title: t("Products"),
+				path: "/dashboard/products",
+				icon: <CloudUploadOutlined fontSize="small" />,
+			},
+			{
+				title: t("Posts"),
+				path: "/dashboard/posts",
+				icon: <Tag fontSize="small" />,
+			},
+			{
+				title: t("Users"),
+				path: "/dashboard/users",
+				icon: <AccountCircleOutlined fontSize="small" />,
+			},
+			{
+				title: t("Campaigns"),
+				path: "/dashboard/campaigns",
+				icon: <FlagOutlined fontSize="small" />,
+			},
+			{
+				title: t("Challengers"),
+				path: "/dashboard/challengers",
+				icon: <LeaderboardOutlined fontSize="small" />,
+			},
+			{
+				title: t("Notifications"),
+				path: "/dashboard/notifications",
+				icon: <MessageOutlined fontSize="small" />,
+			},
+			{
+				title: t("General Setting"),
+				path: "/dashboard/general-setting",
+				icon: <ToggleOnOutlined fontSize="small" />,
+			}
+		]
 	},
-	{
-		title: t("Analytics"),
-		path: "/analytics",
-		icon: <ChartBarIcon fontSize="small" />,
-	},
-	{
-		title: t("Channels"),
-		path: "/channels",
-		icon: <CloudIcon fontSize="small" />,
-	},	
-	// {
-	// 	title: t("Posts"),
-	// 	path: "/incubator/posts",
-	// 	icon: <FlagIcon fontSize="small" />,
-	// },
-	// {
-	// 	title: t("Challenges"),
-	// 	path: "/incubator/challenges",
-	// 	icon: <EmojiEventsIcon fontSize="small" />,
-	// },
-	{
-		title: t("IPs"),
-		path: "/ips",
-		icon: <CopyrightIcon fontSize="small" />,
-	},	
-	
-
-	// ----------------------------------------------------------
-	//   {
-	//     title: t("Logistics"),
-	//     path: "/dashboard/logistics",
-	//     icon: <TruckIcon fontSize="small" />,
-	//     chip: (
-	//       <Chip
-	//         color="secondary"
-	//         label={
-	//           <Typography
-	//             sx={{
-	//               fontSize: "10px",
-	//               fontWeight: "600",
-	//             }}
-	//           >
-	//             NEW
-	//           </Typography>
-	//         }
-	//         size="small"
-	//       />
-	//     ),
-	//   },
-	//   {
-	//     title: t("Account"),
-	//     path: "/dashboard/account",
-	//     icon: <UserCircleIcon fontSize="small" />,
-	//   },
-	],
-},
-{
-	title: t("Personal Workspace"),
-	items: [
-		{
-			title: t("My Favourite"),
-			icon: <ShareIcon fontSize="small" />,
-			path: "/account/favourite",			
-		},
-		{
-			title: t("My Contents"),
-			icon: <Audiotrack fontSize="small" />,
-			path: "/account/contents",			
-		},
-		{
-			title: t("In Review"),			
-			icon: <HealthAndSafetyRounded fontSize="small" />,
-			path: "/account/in-review",			
-		},
-		{
-			title: t("My Posts"),
-			icon: <Bookmark fontSize="small" />,
-			path: "/account/posts",
-		},
-		
-		// {
-		// 	title: t("My Channels"),
-		// 	icon: <NewspaperIcon fontSize="small" />,
-		// 	path: "/account/channels",
-		// },
-		
-		// {
-		// 	title: t("order"),
-		// 	icon: <ShoppingCartIcon fontSize="small" />,
-		// 	path: "/dashboard/orders",
-		// 	children: [
-		// 	{
-		// 		title: t("List"),
-		// 		path: "/dashboard/orders",
-		// 	},
-		// 	{
-		// 		title: t("Details"),
-		// 		path: "/dashboard/orders/1",
-		// 	},
-		// 	],
-		// },
-		// {
-		// 	title: t("fanpage-management"),
-		// 	icon: <ShoppingCartIcon fontSize="small" />,
-		// 	path: "/dashboard/fanpages",
-		// },
-		// {
-		// 	title: t("invoice"),
-		// 	path: "/dashboard/invoices",
-		// 	icon: <ReceiptTaxIcon fontSize="small" />,
-		// },
-		// {
-		// 	title: t("account"),
-		// 	path: "/dashboard/account",
-		// 	icon: <ReceiptTaxIcon fontSize="small" />,
-		// },
-	],
-},
-// {
-//   title: t("Platforms"),
-//   items: [
-//     {
-//       title: t("Job Listings"),
-//       path: "/dashboard/jobs",
-//       icon: <OfficeBuildingIcon fontSize="small" />,
-//       children: [
-//         {
-//           title: t("Browse"),
-//           path: "/dashboard/jobs",
-//         },
-//         {
-//           title: t("Details"),
-//           path: "/dashboard/jobs/companies/1",
-//         },
-//         {
-//           title: t("Create"),
-//           path: "/dashboard/jobs/new",
-//         },
-//       ],
-//     },
-//     {
-//       title: t("Social Media"),
-//       path: "/dashboard/social",
-//       icon: <ShareIcon fontSize="small" />,
-//       children: [
-//         {
-//           title: t("Profile"),
-//           path: "/dashboard/social/profile",
-//         },
-//         {
-//           title: t("Feed"),
-//           path: "/dashboard/social/feed",
-//         },
-//       ],
-//     },
-//     {
-//       title: t("Blog"),
-//       path: "/blog",
-//       icon: <NewspaperIcon fontSize="small" />,
-//       children: [
-//         {
-//           title: t("Post List"),
-//           path: "/blog",
-//         },
-//         {
-//           title: t("Post Details"),
-//           path: "/blog/1",
-//         },
-//         {
-//           title: t("Post Create"),
-//           path: "/blog/new",
-//         },
-//       ],
-//     },
-//   ],
-// },
-// {
-// 	title: t("application"),
-// 	items: [
-// 	{
-// 		title: "Fanpage Listings",
-// 		path: "/dashboard/apps/fanpage-listings",
-// 		icon: <ClipboardListIcon fontSize="small" />,
-// 	},
-// 	{
-// 		title: "Smart link",
-// 		path: "/dashboard/apps/smart-link",
-// 		icon: <MailIcon fontSize="small" />,
-// 	},
-// 	],
-// },
-// {
-// 	title: t("add-ons"),
-// 	items: [
-// 	{
-// 		title: t("following"),
-// 		path: "/dashboard/add-ons/following",
-// 		icon: <ClipboardListIcon fontSize="small" />,
-// 	},
-// 	{
-// 		title: t("chat"),
-// 		path: "/dashboard/add-ons/chat",
-// 		icon: <MailIcon fontSize="small" />,
-// 	},
-// 	{
-// 		title: t("calendar"),
-// 		path: "/dashboard/add-ons/calendar",
-// 		icon: <MailIcon fontSize="small" />,
-// 	},
-// 	],
-// },
-// {
-//   title: t("Pages"),
-//   items: [
-//     {
-//       title: t("Auth"),
-//       path: "/authentication",
-//       icon: <LockClosedIcon fontSize="small" />,
-//       children: [
-//         {
-//           title: t("Register"),
-//           path: "/authentication/register?disableGuard=true",
-//         },
-//         {
-//           title: t("Login"),
-//           path: "/authentication/login?disableGuard=true",
-//         },
-//       ],
-//     },
-//     {
-//       title: t("Pricing"),
-//       path: "/dashboard/pricing",
-//       icon: <CreditCardIcon fontSize="small" />,
-//     },
-//     {
-//       title: t("Checkout"),
-//       path: "/checkout",
-//       icon: <CashIcon fontSize="small" />,
-//     },
-//     {
-//       title: t("Contact"),
-//       path: "/contact",
-//       icon: <MailOpenIcon fontSize="small" />,
-//     },
-//     {
-//       title: t("Error"),
-//       path: "/error",
-//       icon: <XCircleIcon fontSize="small" />,
-//       children: [
-//         {
-//           title: "401",
-//           path: "/401",
-//         },
-//         {
-//           title: "404",
-//           path: "/404",
-//         },
-//         {
-//           title: "500",
-//           path: "/500",
-//         },
-//       ],
-//     },
-//   ],
-// },
 ];
 
 export const DashboardSidebar = (props) => {
 	const { onClose, open } = props;
-	const {user} = useAuth()
+	const { user } = useAuth()
 	const router = useRouter();
 	const { t } = useTranslation();
 	const lgUp = useMediaQuery((theme) => theme.breakpoints.up("lg"), {
@@ -343,17 +147,16 @@ export const DashboardSidebar = (props) => {
 
 	const handlePathChange = () => {
 		if (!router.isReady) {
-		return;
+			return;
 		}
 
 		if (open) {
-		onClose?.();
+			onClose?.();
 		}
 	};
 
 	useEffect(
 		handlePathChange,
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[router.isReady, router.asPath]
 	);
 
@@ -376,18 +179,18 @@ export const DashboardSidebar = (props) => {
 				}}
 			>
 				<Box
-				sx={{
-					display: "flex",
-					flexDirection: "column",
-					height: "100%",
-				}}
+					sx={{
+						display: "flex",
+						flexDirection: "column",
+						height: "100%",
+					}}
 				>
 					<div>
 						<Box sx={{ p: 3 }}>
 							<NextLink href="/" passHref>
 								<a>
 									<Logo
-										source = "/static/logo.svg"
+										source="/static/logo.svg"
 										sx={{
 											height: 42,
 											width: 42,
@@ -453,7 +256,7 @@ export const DashboardSidebar = (props) => {
 					</Box>
 					<Divider
 						sx={{
-						borderColor: "#2D3748", // dark divider
+							borderColor: "#2D3748", // dark divider
 						}}
 					/>
 					<Box sx={{ p: 2 }}>
@@ -476,30 +279,30 @@ export const DashboardSidebar = (props) => {
 						</NextLink>
 					</Box>
 				</Box>
-			</Scrollbar>		
+			</Scrollbar>
 		</>
 	);
 
 	if (lgUp) {
 		return (
-		<Drawer
-			anchor="left"
-			open
-			PaperProps={{
-			sx: {
-				backgroundColor: "neutral.900",
-				borderRightColor: "divider",
-				borderRightStyle: "solid",
-				borderRightWidth: (theme) =>
-				theme.palette.mode === "dark" ? 1 : 0,
-				color: "#FFFFFF",
-				width: 280,
-			},
-			}}
-			variant="permanent"
-		>
-			{content}
-		</Drawer>
+			<Drawer
+				anchor="left"
+				open
+				PaperProps={{
+					sx: {
+						backgroundColor: "neutral.900",
+						borderRightColor: "divider",
+						borderRightStyle: "solid",
+						borderRightWidth: (theme) =>
+							theme.palette.mode === "dark" ? 1 : 0,
+						color: "#FFFFFF",
+						width: 280,
+					},
+				}}
+				variant="permanent"
+			>
+				{content}
+			</Drawer>
 		);
 	}
 
